@@ -1,5 +1,5 @@
 # Pdf files (Project details)
-.pdf
+*.pdf
 
 # History files
 .Rhistory
