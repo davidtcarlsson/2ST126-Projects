@@ -1,6 +1,9 @@
 # Pdf files (Project details)
 Inlämningsuppgifft 1.pdf
 
+# Log files
+*.log
+
 # History files
 .Rhistory
 .Rapp.history
