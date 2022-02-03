@@ -25,8 +25,7 @@ wald_test <- function(xi, theta, mle_estimates) {
 }
 
 score_test <- function(xi, theta, sd, alpha) {
-  # Not defined yet
-  mean(xi)
+  # Not defined
 }
 
 # Generate 10000 samples and run the a given test on each of them
