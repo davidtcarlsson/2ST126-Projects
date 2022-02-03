@@ -5,7 +5,7 @@ Calculations
 
 ## Täthetsfunktionen
 
-$$ p_X(x) = \\frac{1}{\\lambda} e^{-\\frac{x}{\\lambda}} $$
+$ p_X(x) = e^{-} $
 
 ## Likelihood fö
 

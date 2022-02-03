@@ -1,6 +1,6 @@
 ---
 title: "Calculations"
-output: rmarkdown::github_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Täthetsfunktionen
 
-$ p_X(x) = \frac{1}{\lambda} e^{-\frac{x}{\lambda}} $
+$p_X(x) = \frac{1}{\lambda} e^{-\frac{x}{\lambda}}$
 
 ## Likelihood fö
 
