@@ -12,26 +12,79 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Täthetsfunktionen
 
 $$
-p_X(x) = \frac{1}{\lambda} e^{-\frac{x}{\lambda}}
+p_X(x) = \lambda e^{-\lambda x}, \quad x \ge 0
 $$
 
 ## Likelihood för en observation
 
 $$
-L(\lambda) = \frac{1}{\lambda} e^{-\frac{x}{\lambda}}
+L(\lambda) = \lambda e^{-\lambda x}
 $$
 
 ## Log-likelihood för en observation
 
 $$
-l(\lambda) = \ln(\frac{1}{\lambda} e^{-\frac{x}{\lambda}}) 
-           = \ln(\lambda^{-1}) + \ln(e^{-x\lambda^{-1}})  
-           = -\ln(\lambda) -x\lambda^{-1}\ln(e)
-           = -\ln(\lambda) -x\lambda^{-1}
+\begin{aligned}
+l(\lambda) &= \ln(\lambda e^{-\lambda x}) \\
+           &= \ln(\lambda) + \ln(e^{-\lambda x}) \\
+           &= \ln(\lambda) - \lambda x \ln(e) \\
+           &= \ln(\lambda) - \lambda x 
+\end{aligned}
 $$
 
 ## Log-likelihood för hela urvalet
 
 $$
-l_n(\lambda) = \sum_{i=1}^{n}(-\ln(\lambda) -x\lambda^{-1})
+\begin{aligned}
+l_n(\lambda) &= \sum_{i=1}^{n}(\ln(\lambda) - \lambda x) \\
+             &= n\ln(\lambda) - \lambda\sum_{i=1}^{n}x_i
+\end{aligned}
+$$
+
+## Första derivatan av likelihood funktionen för urvalet
+
+$$
+\begin{aligned}
+l'_n(\lambda) &= \frac{d }{d\lambda}(n\ln(\lambda) - \lambda\sum_{i=1}^{n}x_i) \\
+              &= n\lambda^{-1} - \sum_{i=1}^{n}x_i 
+\end{aligned}
+$$
+
+## ML skattningen ges utav att lösa 
+
+$$
+\begin{aligned}
+l'_n(\lambda) &= n\lambda^{-1} - \sum_{i=1}^{n}x_i = 0 \\
+              &\Leftrightarrow \sum_{i=1}^{n}x_i = \frac{n}{\lambda} \\
+              &\Leftrightarrow \hat\lambda = \frac{n}{\sum_{i=1}^{n}x_i}
+\end{aligned}
+$$
+
+## För att beräkna fisherinformationen behöver vi andraderivatan utav log-likelihood funktionen
+
+$$
+\begin{aligned}
+l''_n(\lambda) &= \frac{d }{d\lambda}(n\lambda^{-1} - \sum_{i=1}^{n}x_i) \\
+               &= -n\lambda^{-2} 
+\end{aligned}
+$$
+
+## Fisherinformationen för urvalet blir då
+
+$$
+\begin{aligned}
+I_n(\lambda) &= - E[l''_n(\lambda)] \\
+             &= - E[-n\lambda^{-2}] \\
+             &= n\lambda^{-2}
+\end{aligned}
+$$
+
+## Medelfelet för ML-skattningen ges då utav
+
+$$
+\begin{aligned}
+Sd(\hat\lambda) &= I_n(\hat\lambda)^{-1/2} \\
+                &= (n\hat\lambda^{-2})^{-1/2} \\
+                &= \hat\lambda n^{-1/2}
+\end{aligned}
 $$
