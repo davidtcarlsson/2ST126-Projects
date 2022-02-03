@@ -1,6 +1,14 @@
 Calculations
 ================
 
+# Exponentialfördelningen
+
+## Täthetsfunktionen
+
+$$ p_X(x) = \\frac{1}{\\lambda} e^{-\\frac{x}{\\lambda}} $$
+
+## Likelihood fö
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax
