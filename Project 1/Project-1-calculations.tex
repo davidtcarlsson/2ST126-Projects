@@ -1,0 +1,275 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\title{Project 1 calculations}
+\author{}
+\date{\vspace{-2.5em}}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Project 1 calculations},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\begin{document}
+\maketitle
+
+\hypertarget{exponentialfuxf6rdelningen}{%
+\section{Exponentialfördelningen}\label{exponentialfuxf6rdelningen}}
+
+\hypertarget{tuxe4thetsfunktionen}{%
+\subsection{Täthetsfunktionen}\label{tuxe4thetsfunktionen}}
+
+\[
+p_X(x) = \lambda e^{-\lambda x}, \quad x \ge 0
+\]
+
+\hypertarget{likelihood-fuxf6r-en-observation}{%
+\subsection{Likelihood för en
+observation}\label{likelihood-fuxf6r-en-observation}}
+
+\[
+L(\lambda) = \lambda e^{-\lambda x}
+\]
+
+\hypertarget{log-likelihood-fuxf6r-en-observation}{%
+\subsection{Log-likelihood för en
+observation}\label{log-likelihood-fuxf6r-en-observation}}
+
+\[
+\begin{aligned}
+l(\lambda) &= \ln(\lambda e^{-\lambda x}) \\
+           &= \ln(\lambda) + \ln(e^{-\lambda x}) \\
+           &= \ln(\lambda) - \lambda x \ln(e) \\
+           &= \ln(\lambda) - \lambda x 
+\end{aligned}
+\]
+
+\hypertarget{log-likelihood-fuxf6r-hela-urvalet}{%
+\subsection{Log-likelihood för hela
+urvalet}\label{log-likelihood-fuxf6r-hela-urvalet}}
+
+\[
+\begin{aligned}
+l_n(\lambda) &= \sum_{i=1}^{n}(\ln(\lambda) - \lambda x) \\
+             &= n\ln(\lambda) - \lambda\sum_{i=1}^{n}x_i
+\end{aligned}
+\]
+
+\hypertarget{fuxf6rsta-derivatan-av-likelihood-funktionen-fuxf6r-urvalet}{%
+\subsection{Första derivatan av likelihood funktionen för
+urvalet}\label{fuxf6rsta-derivatan-av-likelihood-funktionen-fuxf6r-urvalet}}
+
+\[
+\begin{aligned}
+l'_n(\lambda) &= \frac{d }{d\lambda}(n\ln(\lambda) - \lambda\sum_{i=1}^{n}x_i) \\
+              &= n\lambda^{-1} - \sum_{i=1}^{n}x_i 
+\end{aligned}
+\]
+
+\hypertarget{ml-skattningen-ges-utav-att-luxf6sa}{%
+\subsection{ML skattningen ges utav att
+lösa}\label{ml-skattningen-ges-utav-att-luxf6sa}}
+
+\[
+\begin{aligned}
+l'_n(\lambda) &= n\lambda^{-1} - \sum_{i=1}^{n}x_i = 0 \\
+              &\Leftrightarrow \sum_{i=1}^{n}x_i = \frac{n}{\lambda} \\
+              &\Leftrightarrow \hat\lambda = \frac{n}{\sum_{i=1}^{n}x_i}
+\end{aligned}
+\]
+
+\hypertarget{fuxf6r-att-beruxe4kna-fisherinformationen-behuxf6ver-vi-andraderivatan-utav-log-likelihood-funktionen}{%
+\subsection{För att beräkna fisherinformationen behöver vi
+andraderivatan utav log-likelihood
+funktionen}\label{fuxf6r-att-beruxe4kna-fisherinformationen-behuxf6ver-vi-andraderivatan-utav-log-likelihood-funktionen}}
+
+\[
+\begin{aligned}
+l''_n(\lambda) &= \frac{d }{d\lambda}(n\lambda^{-1} - \sum_{i=1}^{n}x_i) \\
+               &= -n\lambda^{-2} 
+\end{aligned}
+\]
+
+\hypertarget{fisherinformationen-fuxf6r-urvalet-blir-duxe5}{%
+\subsection{Fisherinformationen för urvalet blir
+då}\label{fisherinformationen-fuxf6r-urvalet-blir-duxe5}}
+
+\[
+\begin{aligned}
+I_n(\lambda) &= - E[l''_n(\lambda)] \\
+             &= - E[-n\lambda^{-2}] \\
+             &= n\lambda^{-2}
+\end{aligned}
+\]
+
+\hypertarget{medelfelet-fuxf6r-ml-skattningen-ges-duxe5-utav}{%
+\subsection{Medelfelet för ML-skattningen ges då
+utav}\label{medelfelet-fuxf6r-ml-skattningen-ges-duxe5-utav}}
+
+\[
+\begin{aligned}
+Sd(\hat\lambda) &= I_n(\hat\lambda)^{-1/2} \\
+                &= (n\hat\lambda^{-2})^{-1/2} \\
+                &= \hat\lambda n^{-1/2}
+\end{aligned}
+\]
+
+\hypertarget{binomialfuxf6rdelningen}{%
+\section{Binomialfördelningen}\label{binomialfuxf6rdelningen}}
+
+\hypertarget{tuxe4thetsfunktionen-1}{%
+\subsection{Täthetsfunktionen}\label{tuxe4thetsfunktionen-1}}
+
+\[
+p_X(k) = {n \choose k} p^k(1 - p)^{n - k}, \quad k=\text{Antal utfall}
+\]
+
+\hypertarget{likelihood-fuxf6r-hela-urvalet}{%
+\subsection{Likelihood för hela
+urvalet}\label{likelihood-fuxf6r-hela-urvalet}}
+
+\[
+L_n(p) = {n \choose k} p^k(1 - p)^{n - k}
+\]
+
+\hypertarget{log-likelihood-fuxf6r-hela-urvalet-1}{%
+\subsection{Log-likelihood för hela
+urvalet}\label{log-likelihood-fuxf6r-hela-urvalet-1}}
+
+\$\$
+
+\begin{aligned}
+l_n(p) &= \ln({n \choose k} p^k(1 - p)^{n - k}) \\
+     &= \ln({n \choose k}) + \ln(p^k) + \ln((1 - p)^{n - k}) \\
+     &= \ln({n \choose k}) + k\ln(p) + (n - k)\ln(1-p)
+           
+\end{aligned}
+
+\$\$
+
+\hypertarget{fuxf6rsta-derivatan-utav-log-likelihood-funktionen-fuxf6r-hela-urvalet}{%
+\subsection{Första derivatan utav log-likelihood funktionen för hela
+urvalet}\label{fuxf6rsta-derivatan-utav-log-likelihood-funktionen-fuxf6r-hela-urvalet}}
+
+\[
+\begin{aligned}
+l'_n(p) &= \frac{d }{dp}(\ln({n \choose k}) + k\ln(p) + (n - k)\ln(1-p)) \\
+            &= kp^{-1} - (n - k)(1 - p)^{-1}
+\end{aligned}
+\]
+
+\hypertarget{ml-skattninges-ges-utav-att-luxf6sa-ekvationen-fuxf6r-p}{%
+\subsection{ML-skattninges ges utav att lösa ekvationen för
+p}\label{ml-skattninges-ges-utav-att-luxf6sa-ekvationen-fuxf6r-p}}
+
+\[
+\begin{aligned}
+l'_n(p) &= kp^{-1} - (n - k)(1 - p)^{-1} = 0 \\
+        &\Leftrightarrow kp^{-1} = (n - k)(1 - p)^{-1} \\
+        &\Leftrightarrow (1-p)k = p(n-k) \\
+        &\Leftrightarrow k - pk = pn - pk \\
+        &\Leftrightarrow k = pn \\
+        &\Leftrightarrow \hat p = \frac{k}{n}
+\end{aligned}
+\] \#\# För att beräkna fisherinformationen behöver vi andraderivatan
+utav log-likelihood funktionen
+
+\[
+\begin{aligned}
+l''_n(p) &= \frac{d }{dp}(kp^{-1} - (n - k)(1 - p)^{-1}) \\
+         &= -kp^{-2} - (n - k)(1 - p)^{-2}
+\end{aligned}
+\]
+
+\hypertarget{fisherinformationen-fuxf6r-hela-urvalet-blir-duxe5}{%
+\subsection{Fisherinformationen för hela urvalet blir
+då}\label{fisherinformationen-fuxf6r-hela-urvalet-blir-duxe5}}
+
+\[
+\begin{aligned}
+I_n(p) &= - E[l''_n(p)] \\
+             &= -E[-kp^{-2} - (n - k)(1 - p)^{-2}] \\
+             &= -E[\frac{-k + 2kp - np^2}{p^2(1-p)^2}] \\
+\end{aligned}
+\]
+
+Eftersom \(E[k] = np\) får vi
+
+\[
+\begin{aligned}
+I_n(p) &= - E[l''_n(p)] \\
+             &= -E[-kp^{-2} - (n - k)(1 - p)^{-2}] \\
+             &= -E[\frac{-k + 2kp - np^2}{p^2(1-p)^2}] \\
+             &= \frac{np + np^2}{p^2(1-p)^2} \\
+             &= \frac{n}{p(1-p)}
+\end{aligned}
+\]
+
+\hypertarget{medelfelet-fuxf6r-ml-skattningen-ges-duxe5-utav-1}{%
+\subsection{Medelfelet för ML-skattningen ges då
+utav}\label{medelfelet-fuxf6r-ml-skattningen-ges-duxe5-utav-1}}
+
+\[
+\begin{aligned}
+Sd(\hat p) &= I_n(\hat p)^{-1/2} \\
+                &= \sqrt{\frac{\hat p(1-\hat p)}{n}} \\
+\end{aligned}
+\]
+
+\end{document}
