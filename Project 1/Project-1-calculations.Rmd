@@ -1,5 +1,6 @@
 ---
-title: "Project 1 calculations"
+title: "Beräkningar inlämningsuppgift 1"
+author: "Erik Ödmann, David Carlsson"
 output: pdf_document
 ---
 
@@ -89,6 +90,8 @@ Sd(\hat\lambda) &= I_n(\hat\lambda)^{-1/2} \\
 \end{aligned}
 $$
 
+\newpage
+
 # Binomialfördelningen
 
 ## Täthetsfunktionen
@@ -110,7 +113,6 @@ $$
 l_n(p) &= \ln({n \choose k} p^k(1 - p)^{n - k}) \\
      &= \ln({n \choose k}) + \ln(p^k) + \ln((1 - p)^{n - k}) \\
      &= \ln({n \choose k}) + k\ln(p) + (n - k)\ln(1-p)
-           
 \end{aligned}
 $$
 
@@ -158,11 +160,8 @@ Eftersom $E[k] = np$ får vi
 
 $$
 \begin{aligned}
-I_n(p) &= - E[l''_n(p)] \\
-             &= -E[-kp^{-2} - (n - k)(1 - p)^{-2}] \\
-             &= -E[\frac{-k + 2kp - np^2}{p^2(1-p)^2}] \\
-             &= \frac{np + np^2}{p^2(1-p)^2} \\
-             &= \frac{n}{p(1-p)}
+I_n(p) &= \frac{np + np^2}{p^2(1-p)^2} \\
+       &= \frac{n}{p(1-p)}
 \end{aligned}
 $$
 
@@ -171,6 +170,6 @@ $$
 $$
 \begin{aligned}
 Sd(\hat p) &= I_n(\hat p)^{-1/2} \\
-                &= \sqrt{\frac{\hat p(1-\hat p)}{n}} \\
+           &= \sqrt{\frac{\hat p(1-\hat p)}{n}} \\
 \end{aligned}
 $$
