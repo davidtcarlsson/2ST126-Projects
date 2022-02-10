@@ -25,21 +25,21 @@ wald_test <- function(xi, theta, mle_estimates) {
   # Extract the parameters from the vector
   theta_hat <- mle_estimates(xi)[1]
   sd <- mle_estimates(xi)[2]
-  (abs(theta_hat - theta) / sd) < qnorm(1 - alpha / 2)
+  (abs(theta_hat - theta) / sd) > qnorm(1 - alpha / 2)
 }
 
 # Runs the score test for the exponential distribution
 score_test_exp <- function(xi, lambda0, mle_estimates) {
   n <- length(xi)
   xbar <- mean(xi)
-  sqrt(n) * abs(1 - lambda0 * xbar) < qnorm(1 - alpha / 2)
+  sqrt(n) * abs(1 - lambda0 * xbar) > qnorm(1 - alpha / 2)
 }
 
 # Runs the score test for the binomial distribution
 score_test_binom <- function(xi, p0, mle_estimates) {
   n <- length(xi)
   xbar  <- mle_estimates(xi)[1]
-  (abs(xbar - p0) / sqrt((p0 * (1 - p0)) / n)) < qnorm(1 - alpha / 2)
+  (abs(xbar - p0) / sqrt((p0 * (1 - p0)) / n)) > qnorm(1 - alpha / 2)
 }
 
 # Generate 10000 samples and run the a given test on each of them
@@ -48,7 +48,8 @@ score_test_binom <- function(xi, p0, mle_estimates) {
 run_exp_tests <- function() {
   # Create a matrix that we will add our results to
   exp_output <- matrix(nrow = 9, ncol = 5)
-  colnames(exp_output) <- c("Stickprovsstorlek", "p", "Score-testet", "Wald-testet", "Absolut differens")
+  colnames(exp_output) <- c("n", "p", "Score-testet", 
+                            "Wald-testet", "Absolut diff")
   counter <- 1
   # Loop trough a number of different lambdas
   for (lambda in c(0.1, 1, 10)) {
@@ -60,7 +61,8 @@ run_exp_tests <- function() {
       results_score <- mean(unlist(lapply(X = xi, FUN = score_test_exp, lambda, mle_exp)))
       results_wald <- mean(unlist(lapply(X = xi, FUN = wald_test, lambda, mle_exp)))
       # Add the results to the table
-      exp_output[counter, ] <- c(n, lambda, results_score, results_wald, abs(results_score-results_wald))
+      exp_output[counter, ] <- c(n, lambda, results_score, 
+                                 results_wald, abs(results_score-results_wald))
       counter <- counter + 1
     }
   }
@@ -70,7 +72,8 @@ run_exp_tests <- function() {
 run_binom_tests <- function() {
   # Create a matrix that we will add our results to
   binom_output <- matrix(nrow = 9, ncol = 5)
-  colnames(binom_output) <- c("Stickprovsstorlek", "Lambda", "Score-testet", "Wald-testet", "Absolut differens")
+  colnames(binom_output) <- c("n", "Lambda", "Score-testet", 
+                              "Wald-testet", "Absolut diff")
   counter <- 1
   # Loop trough a number of different p's
   for (p in c(0.1, 0.3, 0.5)) {
@@ -79,10 +82,13 @@ run_binom_tests <- function() {
       # For a given p and sample size generate 10000 samples
       xi <- replicate(10000, rbinom(n = n, size = 1, prob = p), simplify = FALSE)
       # Test each sample and return the proportion that fulfilled the test
-      results_score <- mean(unlist(lapply(X = xi, FUN = score_test_binom, p, mle_binom)))
-      results_wald <- mean(unlist(lapply(X = xi, FUN = wald_test, p, mle_binom)))
+      results_score <- mean(unlist(lapply(X = xi, 
+                                          FUN = score_test_binom, p, mle_binom)))
+      results_wald <- mean(unlist(lapply(X = xi, 
+                                         FUN = wald_test, p, mle_binom)))
       # Add the results to the table
-      binom_output[counter, ] <- c(n, p, results_score, results_wald, abs(results_score-results_wald))
+      binom_output[counter, ] <- c(n, p, results_score, 
+                                   results_wald, abs(results_score-results_wald))
       counter <- counter + 1
     }
   }
