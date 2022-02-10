@@ -1,3 +1,6 @@
+# Set a seed so that we are able to reproduce the results
+set.seed(2022)
+
 # The significance level we will use for both tests
 alpha <- 0.05
 
@@ -43,7 +46,10 @@ score_test_binom <- function(xi, p0, mle_estimates) {
 # returns the proportion of tests where the confidence interval "covered"
 # the true parameter value
 run_exp_tests <- function() {
-  print("Tests on the exponential distribution")
+  # Create a matrix that we will add our results to
+  exp_output <- matrix(nrow = 9, ncol = 5)
+  colnames(exp_output) <- c("n", "p", "score", "wald", "abs_diff")
+  counter <- 1
   # Loop trough a number of different lambdas
   for (lambda in c(0.1, 1, 10)) {
     # Loop through a number of different sample sizes
@@ -53,16 +59,19 @@ run_exp_tests <- function() {
       # Test each sample and return the proportion that fulfilled the test
       results_score <- mean(unlist(lapply(X = xi, FUN = score_test_exp, lambda, mle_exp)))
       results_wald <- mean(unlist(lapply(X = xi, FUN = wald_test, lambda, mle_exp)))
-      # Print out lambda, sample size and the proportion
-      print(paste("Score", "n =", n, "lambda =", lambda, "prop = ", results_score))
-      print(paste("Wald", "n =", n, "lambda =", lambda, "prop = ", results_wald))
+      # Add the results to the table
+      exp_output[counter, ] <- c(n, lambda, results_score, results_wald, abs(results_score-results_wald))
+      counter <- counter + 1
     }
-    print("-----------------------------------------------")
   }
+  return(exp_output)
 }
 
 run_binom_tests <- function() {
-  print("Tests on the binomial distribution")
+  # Create a matrix that we will add our results to
+  binom_output <- matrix(nrow = 9, ncol = 5)
+  colnames(binom_output) <- c("n", "p", "score", "wald", "abs_diff")
+  counter <- 1
   # Loop trough a number of different p's
   for (p in c(0.1, 0.3, 0.5)) {
     # Loop through a number of different sample sizes
@@ -72,14 +81,20 @@ run_binom_tests <- function() {
       # Test each sample and return the proportion that fulfilled the test
       results_score <- mean(unlist(lapply(X = xi, FUN = score_test_binom, p, mle_binom)))
       results_wald <- mean(unlist(lapply(X = xi, FUN = wald_test, p, mle_binom)))
-      # Print out lambda, sample size and the proportion
-      print(paste("Score","n =", n, "p =", p, "prop =", results_score))
-      print(paste("Wald","n =", n, "p =", p, "prop =", results_wald))
+      # Add the results to the table
+      binom_output[counter, ] <- c(n, p, results_score, results_wald, abs(results_score-results_wald))
+      counter <- counter + 1
     }
-    print("-----------------------------------------------")
   }
+  return(binom_output)
 }
 
-# Run the tests on both distributions
-run_exp_tests()
-run_binom_tests()
+# Run the tests on both distributions and generate two output tables
+exp_results <- run_exp_tests()
+binom_results <- run_binom_tests()
+
+# Comments
+# Score and wald test yield the same results on the exponential distribution
+# For the binomial distribution the score and wald test converges when n->inf.
+# For small sample sizes the wald test are further from the significance level 
+# than the score test.
