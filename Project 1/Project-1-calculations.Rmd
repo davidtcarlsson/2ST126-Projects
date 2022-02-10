@@ -8,6 +8,12 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, include=FALSE}
+# Run the external project script and load our result tables
+# into the environment
+source("Project 1.R", local = knitr::knit_global())
+```
+
 # Exponentialfördelningen
 
 Täthetsfunktionen för exponentialfunktionen är
@@ -169,6 +175,11 @@ $$
 $$
 
 Vilket ger oss ett konfidensintervall för $\lambda_0$ baserat på wald-testet
+
+```{r echo = FALSE, results = 'asis'}
+library(knitr)
+kable(exp_results, caption = 'Exponential distibution test results')
+```
 
 \newpage
 
@@ -336,3 +347,8 @@ $$
 $$
 
 Vilket ger oss ett konfidensintervall för $p_0$ baserat på wald-testet
+
+```{r echo = FALSE, results = 'asis'}
+library(knitr)
+kable(binom_results, caption = 'Binomial distibution test results')
+```
