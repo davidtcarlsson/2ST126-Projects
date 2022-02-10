@@ -48,7 +48,7 @@ score_test_binom <- function(xi, p0, mle_estimates) {
 run_exp_tests <- function() {
   # Create a matrix that we will add our results to
   exp_output <- matrix(nrow = 9, ncol = 5)
-  colnames(exp_output) <- c("n", "p", "score", "wald", "abs_diff")
+  colnames(exp_output) <- c("Stickprovsstorlek", "p", "Score-testet", "Wald-testet", "Absolut differens")
   counter <- 1
   # Loop trough a number of different lambdas
   for (lambda in c(0.1, 1, 10)) {
@@ -70,7 +70,7 @@ run_exp_tests <- function() {
 run_binom_tests <- function() {
   # Create a matrix that we will add our results to
   binom_output <- matrix(nrow = 9, ncol = 5)
-  colnames(binom_output) <- c("n", "p", "score", "wald", "abs_diff")
+  colnames(binom_output) <- c("Stickprovsstorlek", "Lambda", "Score-testet", "Wald-testet", "Absolut differens")
   counter <- 1
   # Loop trough a number of different p's
   for (p in c(0.1, 0.3, 0.5)) {
