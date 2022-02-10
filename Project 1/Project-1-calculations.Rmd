@@ -178,7 +178,7 @@ Vilket ger oss ett konfidensintervall för $\lambda_0$ baserat på wald-testet
 
 ```{r echo = FALSE, results = 'asis'}
 library(knitr)
-kable(exp_results, caption = 'Exponential distibution test results')
+kable(exp_results, caption = 'Resultatet av testerna på exponentialfördelningen')
 ```
 
 \newpage
@@ -350,5 +350,5 @@ Vilket ger oss ett konfidensintervall för $p_0$ baserat på wald-testet
 
 ```{r echo = FALSE, results = 'asis'}
 library(knitr)
-kable(binom_results, caption = 'Binomial distibution test results')
+kable(binom_results, caption = 'Resultatet av testerna på binomialfördelningen')
 ```
