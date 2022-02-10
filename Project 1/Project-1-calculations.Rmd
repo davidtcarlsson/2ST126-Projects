@@ -176,9 +176,15 @@ $$
 
 Vilket ger oss ett konfidensintervall för $\lambda_0$ baserat på wald-testet
 
+## Resultat
+
+I figuren nedan ser vi resultatet för exponentialfördelningen.
+
 ```{r echo = FALSE, results = 'asis'}
 library(knitr)
-kable(exp_results, caption = 'Resultatet av testerna på exponentialfördelningen')
+kable(exp_results, 
+      caption = 'Resultatet av testerna på exponentialfördelningen',
+      align = 'l')
 ```
 
 \newpage
@@ -348,7 +354,20 @@ $$
 
 Vilket ger oss ett konfidensintervall för $p_0$ baserat på wald-testet
 
+## Resultat
+
+I figuren nedan ser vi resultatet för binomialfördelningen.
+
 ```{r echo = FALSE, results = 'asis'}
 library(knitr)
-kable(binom_results, caption = 'Resultatet av testerna på binomialfördelningen')
+kable(binom_results, 
+      caption = 'Resultatet av testerna på binomialfördelningen',
+      align = 'l')
 ```
+Vi kan se att för score-testet så ligger förkastningsandelen kring 5% vilket var
+vår signifikansnivå. Vi kan också notera att vi ser en tendens av att andelen
+närmar sig 5% då stickprovsstorleken blir större. 
+
+# Slutsats
+
+
