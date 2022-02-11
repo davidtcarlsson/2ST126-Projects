@@ -1,3 +1,5 @@
+# Library that I use to apply the "pipe" operator. Only difference it makes
+# is that the test functions look a lot "cleaner"
 library(magrittr)
 
 # Set a seed so that we are able to reproduce the results
@@ -5,17 +7,18 @@ set.seed(2022)
 
 # The significance level we will use for both tests
 alpha <- 0.05
+
 # Number of simulated datasets 
 iterations <- 10000
 
 # Generate 10000 samples and run the a given test on each of them
 # returns the proportion of tests where the confidence interval "covered"
 # the true parameter value
-run_exp_tests <- function() {
+run_exp_tests <- function(alpha, iterations) {
   # Create a matrix that we will add our results to
-  exp_output <- matrix(nrow = 9, ncol = 4)
-  colnames(exp_output) <- c("n", "p", "Score-testet", 
-                            "Wald-testet")
+  output <- matrix(nrow = 9, ncol = 4)
+  colnames(output) <- c("n", "p", "Score-testet", "Wald-testet")
+  # Counter to keep track on which row to add the new data in the output matrix
   counter <- 1
   # Loop trough a number of different lambdas
   for (lambda in c(0.1, 1, 10)) {
@@ -27,7 +30,7 @@ run_exp_tests <- function() {
       result_score <- lapply(xi, FUN = function(xi) {
         n <- length(xi)
         xbar <- mean(xi)
-        sqrt(n) * abs(1 - lambda * xbar) > qnorm(1 - alpha / 2)
+        (sqrt(n) * abs(1 - lambda * xbar)) > qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Run a function that applies the wald test
       result_wald <- lapply(xi, FUN = function(xi) {
@@ -36,19 +39,18 @@ run_exp_tests <- function() {
         (abs(lambda_hat - lambda) / sd) > qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Add the results to the table
-      exp_output[counter, ] <- c(n, lambda, result_score, 
-                                 result_wald)
+      output[counter, ] <- c(n, lambda, result_score, result_wald)
       counter <- counter + 1
     }
   }
-  return(exp_output)
+  return(output)
 }
 
-run_binom_tests <- function() {
+run_binom_tests <- function(alpha, iterations) {
   # Create a matrix that we will add our results to
-  binom_output <- matrix(nrow = 9, ncol = 4)
-  colnames(binom_output) <- c("n", "Lambda", "Score-testet", 
-                              "Wald-testet")
+  output <- matrix(nrow = 9, ncol = 4)
+  colnames(output) <- c("n", "Lambda", "Score-testet", "Wald-testet")
+  # Counter to keep track on which row to add the new data in the output matrix
   counter <- 1
   # Loop trough a number of different p's
   for (p in c(0.1, 0.3, 0.5)) {
@@ -68,17 +70,16 @@ run_binom_tests <- function() {
         (abs(xbar - p) / sd) > qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Add the results to the table
-      binom_output[counter, ] <- c(n, p, result_score, 
-                                   result_wald)
+      output[counter, ] <- c(n, p, result_score, result_wald)
       counter <- counter + 1
     }
   }
-  return(binom_output)
+  return(output)
 }
 
 # Run the tests on both distributions and generate two output tables
-exp_results <- run_exp_tests()
-binom_results <- run_binom_tests()
+exp_results <- run_exp_tests(alpha, iterations)
+binom_results <- run_binom_tests(alpha, iterations)
 
 # Comments
 # Score and wald test yield the same results on the exponential distribution
