@@ -17,7 +17,7 @@ iterations <- 10000
 run_exp_tests <- function(alpha, iterations) {
   # Create a matrix that we will add our results to
   output <- matrix(nrow = 9, ncol = 4)
-  colnames(output) <- c("n", "p", "Score-testet", "Wald-testet")
+  colnames(output) <- c("n", "lambda", "Score-testet", "Wald-testet")
   # Counter to keep track on which row to add the new data in the output matrix
   counter <- 1
   # Loop trough a number of different lambdas
@@ -49,7 +49,7 @@ run_exp_tests <- function(alpha, iterations) {
 run_binom_tests <- function(alpha, iterations) {
   # Create a matrix that we will add our results to
   output <- matrix(nrow = 9, ncol = 4)
-  colnames(output) <- c("n", "Lambda", "Score-testet", "Wald-testet")
+  colnames(output) <- c("n", "p", "Score-testet", "Wald-testet")
   # Counter to keep track on which row to add the new data in the output matrix
   counter <- 1
   # Loop trough a number of different p's
