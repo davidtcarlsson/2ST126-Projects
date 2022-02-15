@@ -186,6 +186,8 @@ kable(exp_results,
       caption = 'Resultatet av testerna på exponentialfördelningen')
 ```
 
+För exponentialfördelningen ser vi att båda tester producerar exakt samma resultat. Detta var förväntat då vi i härledningen fann att uttrycken för konfidensintervallen var identiska. Då n blir större ser vi att täckningsandelen kommer närmare och närmare 95%. 
+
 \newpage
 
 # Binomialfördelningen
@@ -363,10 +365,10 @@ kable(binom_results,
       caption = 'Resultatet av testerna på binomialfördelningen')
 ```
 
-Vi kan se att för score-testet så ligger täckningsandelen kring 95% vilket är förväntat givet vår signifikansnivå. Vi kan också notera att vi ser en tendens 
+Vi kan se att för score-testet så ligger täckningsandelen kring 95% vilket är förväntat givet vår signifikansnivå. Vi noterar en tendens 
 av att andelen kommer närmare 95% då stickprovsstorleken blir större. Vi kan 
 också se att parametervärdet $p_0$ har en relativt stor påverkan på just wald-testet
 eftersom att det är en del utav medelfelsberäkningen vilket vi såg i vår tidigare
-härledning.
+härledning. Tabellen visar att för stora n har wald- och score-testet en liknande täckningsandel.
 
 
