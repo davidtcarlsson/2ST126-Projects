@@ -369,6 +369,7 @@ Vi kan se att för score-testet så ligger täckningsandelen kring 95% vilket ä
 av att andelen kommer närmare 95% då stickprovsstorleken blir större. Vi kan 
 också se att parametervärdet $p_0$ har en relativt stor påverkan på just wald-testet
 eftersom att det är en del utav medelfelsberäkningen vilket vi såg i vår tidigare
-härledning. Tabellen visar att för stora n har wald- och score-testet en liknande täckningsandel.
+härledning. Tex när $p_0=0.1$ så kommer intervallbredden att minska i jämförelse med då $p_0=0.5$ vilket gör att vi får en lägre täckningsandel.
+Tabellen visar att för stora n har wald- och score-testet en liknande täckningsandel.
 
 
