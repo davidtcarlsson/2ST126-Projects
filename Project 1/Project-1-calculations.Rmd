@@ -40,7 +40,7 @@ l(\lambda) &= \ln(\lambda e^{-\lambda x}) \\
 \end{aligned}
 $$
 
-Log-likelihood funktionen för hela urvalet får vi genom att ta summan över
+Log-likelihood funktionen för hela urvalet får vi genom att ta summan av
 log-likehood funktionen för en observation
 
 $$
@@ -107,7 +107,7 @@ Vi börjar med att härleda konfidensintervallet baserat på score-testet
 
 $$
 \begin{aligned}
-T_{\text{score}} &=   \frac{l'_n(\lambda_0)}{\sqrt{I_n(\lambda_o)}} \approx N(0, 1)
+T_{\text{score}} &=   \frac{l'_n(\lambda_0)}{\sqrt{I_n(\lambda_0)}} \approx N(0, 1)
 \end{aligned}   
 $$
 
@@ -190,7 +190,7 @@ kable(exp_results,
 
 # Binomialfördelningen
 
-Täthetsfunktionen för binomialfördelninge är
+Täthetsfunktionen för binomialfördelningen är
 
 $$
 p_X(k) = {n \choose k} p^k(1 - p)^{n - k}, \quad k=\text{Antal utfall}
@@ -225,7 +225,7 @@ l'_n(p) &= \frac{d }{dp}(\ln({n \choose k}) + k\ln(p) + (n - k)\ln(1-p)) \\
 \end{aligned}
 $$
 
-ML-skattninges ges utav att lösa ekvationen för p
+ML-skattningen ges utav att lösa ekvationen för p
 
 $$
 \begin{aligned}

@@ -30,13 +30,13 @@ run_exp_tests <- function(alpha, iterations) {
       result_score <- lapply(xi, FUN = function(xi) {
         n <- length(xi)
         xbar <- mean(xi)
-        (sqrt(n) * abs(1 - lambda * xbar)) > qnorm(1 - alpha / 2)
+        (sqrt(n) * abs(1 - lambda * xbar)) < qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Run a function that applies the wald test
       result_wald <- lapply(xi, FUN = function(xi) {
         lambda_hat <- n / sum(xi)
         sd <- lambda_hat / sqrt(n)
-        (abs(lambda_hat - lambda) / sd) > qnorm(1 - alpha / 2)
+        (abs(lambda_hat - lambda) / sd) < qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Add the results to the table
       output[counter, ] <- c(n, lambda, result_score, result_wald)
@@ -61,13 +61,13 @@ run_binom_tests <- function(alpha, iterations) {
       # Run a function that applies the score test
       result_score <- lapply(xi, FUN = function(xi) { 
         xbar <- xi / n 
-        (abs(xbar - p) / sqrt((p * (1 - p)) / n)) > qnorm(1 - alpha / 2)
+        (abs(xbar - p) / sqrt((p * (1 - p)) / n)) < qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Run a function that applies the wald test
       result_wald <- lapply(xi, FUN = function(xi) {
         xbar <- xi / n
         sd <- sqrt(xbar * (1 - xbar) / n) 
-        (abs(xbar - p) / sd) > qnorm(1 - alpha / 2)
+        (abs(xbar - p) / sd) < qnorm(1 - alpha / 2)
       }) %>% unlist %>% mean
       # Add the results to the table
       output[counter, ] <- c(n, p, result_score, result_wald)
