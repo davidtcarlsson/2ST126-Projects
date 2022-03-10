@@ -297,23 +297,52 @@ T_{\text{score}} &= \frac{l'_n(p_0)}{\sqrt{I_n(p_o)}} \\
                  &= \frac{\frac{n}{p_0(1-p_0)}(\bar x-p_0)}{\sqrt{\frac{n}{p_0(1-p_0)}}} \\
                  &= \sqrt{\frac{p_0(1-p_0)}{n}} \times \frac{n}{p_0(1-p_0)} (\bar x - p_0) \\
                  &= \sqrt{\frac{n}{p_0(1-p_0)}} (\bar x - p_0) \\
-                 &= \frac{\bar x - p_0}{\sqrt{p_0(1-p_0)/n}} \approx N(0,1)
+                 &= \frac{\bar x - p_0}{\sqrt{p_0(1-p_0)/n}} \approx N(0,1) \\
+                 &= \frac{(\bar x - p_0)^2}{p_0(1-p_0)/n} \approx \chi^2_1
 \end{aligned}
 $$
 
-Vi kan nu härleda $100(1-\alpha)$%-igt konfidensintervall för $p_0$ 
+Vi kan nu härleda $100(1-\alpha)$%-igt konfidensintervall för $p_0$. Vi utgår från
 
 $$
 \begin{aligned}
-1 - \alpha &= P(-z_{\alpha/2} < T < z_{\alpha/2}) \\
-           &= P(-z_{\alpha/2} < \frac{\bar x - p_0}{\sqrt{p_0(1-p_0)/n}} < z_{\alpha/2}) \\
-           &= P(-z_{\alpha/2}\sqrt{p_0(1-p_0)/n} < \bar x - p_0 < z_{\alpha/2}\sqrt{p_0(1-p_0)/n}) \\
-           &= P( -\bar x - z_{\alpha/2}\sqrt{p_0(1-p_0)/n} < - p_0 < -\bar x + z_{\alpha/2}\sqrt{p_0(1-p_0)/n}) \\
-           &= P( \bar x - z_{\alpha/2}\sqrt{p_0(1-p_0)/n} < p_0 < \bar x + z_{\alpha/2}\sqrt{p_0(1-p_0)/n})
+ \frac{(\bar x - p_0)^2}{p_0(1-p_0)/n} = z^2_{\alpha/2} \\
+  \Leftrightarrow(\bar x - p_0)^2 = \frac{p_0(1-p_0)}{n} z^2_{\alpha/2} \\
+ \Leftrightarrow\bar x^2 - 2\bar x p_0 + p_0^2 = \frac{p_0(1-p_0)}{n} z^2_{\alpha/2}
 \end{aligned}
 $$
 
-Vilket ger oss ett konfidensintervall för $p_0$ baserat på score-testet
+Samlar vi nu alla termer i vänsterledet får vi
+
+$$
+\begin{aligned}
+ p_0^2 + \frac{z^2_{\alpha/2}}{n}p_0^2 - 2\bar x p_0 - \frac{z^2_{\alpha/2}}{n}p_0 +\bar x^2 = 0 \\
+ \Leftrightarrow (1 + \frac{z^2_{\alpha/2}}{n})p_0^2 + ( -2\bar x - \frac{z^2_{\alpha/2}}{n})p_0 +\bar x^2 = 0
+\end{aligned}
+$$
+
+Vilket vi applicerar rotformeln-formeln på. Detta ger oss
+
+$$
+\begin{aligned}
+ p_0 &= \frac{\bar x + {\frac{1}{2n}z^2_{\alpha/2}}}{1 + \frac{1}{n}z^2_{\alpha/2}} \pm \frac{\sqrt{(2\bar x + \frac{1}{n}z^2_{\alpha/2})^2 - 4\bar x^2 - \frac{4}{n}\bar x^2 z^2_{\alpha/2}}}{2 + \frac{2}{n}z^2_{\alpha/2}}\\
+ &= \frac{\bar x + {\frac{1}{2n}z^2_{\alpha/2}}}{1 + \frac{1}{n}z^2_{\alpha/2}} \pm \frac{1}{2 + \frac{2}{n}z^2_{\alpha/2}}\sqrt{4\bar x^2 + \frac{4}{n}\bar xz^2_{\alpha/2} + \frac{1}{n^2}(z^2_{\alpha/2})^2 - 4\bar x^2 - \frac{4}{n}\bar x^2z^2_{\alpha/2}}\\
+\end{aligned}
+$$
+
+Som vi kan skriva om till
+
+$$
+\begin{aligned}
+ p_0 &= \frac{\bar x + {\frac{1}{2n}z^2_{\alpha/2}}}{1 + \frac{1}{n}z^2_{\alpha/2}} \pm \frac{z_{\alpha/2}}{1 + \frac{1}{n}z^2_{\alpha/2}} \sqrt{\frac{\bar x(1-\bar x)}{n} + \frac{1}{4n^2}z^2_{\alpha/2}}
+\end{aligned}
+$$
+
+Vilket ger oss ett konfidensintervall för $p_0$ baserat på score-testet med gränserna
+
+$$
+\Bigg[\frac{\bar x + {\frac{1}{2n}z^2_{\alpha/2}}}{1 + \frac{1}{n}z^2_{\alpha/2}} - \frac{z_{\alpha/2}}{1 + \frac{1}{n}z^2_{\alpha/2}} \sqrt{\frac{\bar x(1-\bar x)}{n} + \frac{1}{4n^2}z^2_{\alpha/2}}, \frac{\bar x + {\frac{1}{2n}z^2_{\alpha/2}}}{1 + \frac{1}{n}z^2_{\alpha/2}} + \frac{z_{\alpha/2}}{1 + \frac{1}{n}z^2_{\alpha/2}} \sqrt{\frac{\bar x(1-\bar x)}{n} + \frac{1}{4n^2}z^2_{\alpha/2}}\Bigg]
+$$
 
 ## Wald-testet
 
