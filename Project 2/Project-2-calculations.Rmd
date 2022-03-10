@@ -17,7 +17,7 @@ source("Project-2.R", local = knitr::knit_global())
 
 # Deluppgift 1
 
-Vi har ett stickprov $X_1,...,X_n$ från $X \sim Poi(\theta)$, där $\theta$ är okänd $(\theta>0)$. 
+Vi har ett stickprov $X_1,...,X_n$ från $X \sim Poi(\theta)$, där $\theta$ är okänd $(\theta>0)$.
 
 ## Fall 1
 
@@ -35,8 +35,7 @@ $$
 \begin{aligned}
   L(\theta) = \frac{\theta^xe^{-\theta}}{x!}
 \end{aligned}
-$$
-Vilket ger oss log-likelihood funktionen för en observation
+$$ Vilket ger oss log-likelihood funktionen för en observation
 
 $$
 \begin{aligned}
@@ -118,11 +117,16 @@ $$
 
 Vilket är proportionell mot $\Gamma(\alpha + n\bar x, \beta + n)$. Vi kan därmed dra slutsatsen att aposteriorifördelningen i fall 2 är proportionell mot samma gammafördelning som i fall 1 då $\alpha=1/2$ och $\beta=0$.
 
+\pagebreak
+
 # Deluppgift 2
 
-```{r echo=FALSE, fig.height=10, fig.width=8, fig.cap="Simulerad fördelning av medelvärdet för icke-parametriskt samt parametrisk bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
-par(mfrow = c(2, 1))
+I deluppgift 2 ska vi konstruera konfidensintervall med hjälp av bootstrap.
+
+```{r echo=FALSE, fig.cap="Simulerad fördelning av medelvärdet för icke-parametriskt  bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
 hist_boot()
-hist_sim()
 ```
 
+```{r echo=FALSE, fig.cap="Simulerad fördelning av medelvärdet för parametrisk bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
+hist_sim()
+```
