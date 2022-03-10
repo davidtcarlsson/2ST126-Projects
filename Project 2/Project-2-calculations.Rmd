@@ -1,0 +1,128 @@
+---
+title: "Inlämningsuppgift 2"
+author: "Erik Ödmann, David Carlsson"
+date: '2022-03-18'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include=FALSE}
+source("Project-2.R", local = knitr::knit_global())
+```
+
+\renewcommand{\figurename}{Figur}
+
+# Deluppgift 1
+
+Vi har ett stickprov $X_1,...,X_n$ från $X \sim Poi(\theta)$, där $\theta$ är okänd $(\theta>0)$. 
+
+## Fall 1
+
+I första fallet använder vi apriorifördelningen $p(\theta) \propto 1/\sqrt{\theta}$ som tillhör klassen av Jeffreys fördelningar, där $p(\theta) \propto \sqrt{I(\theta)}$. För att kontrollera detta behöver vi beräkna fisherinformationen för en poissionfördelad variabel. Fisherinformationen ges utav formeln
+
+$$
+\begin{aligned}
+  I(\theta) = -E[l''(\theta)]
+\end{aligned}
+$$
+
+Där likelihood funktionen för en observation är
+
+$$
+\begin{aligned}
+  L(\theta) = \frac{\theta^xe^{-\theta}}{x!}
+\end{aligned}
+$$
+Vilket ger oss log-likelihood funktionen för en observation
+
+$$
+\begin{aligned}
+  l(\theta) &= \ln \bigg(\frac{\theta^xe^{-\theta}}{x!}\bigg) \\
+            &= \ln(\theta^xe^{-\theta}) - \ln(x!) \\
+            &= \ln(\theta^x) + \ln(e^{-\theta}) - \ln(x!) \\
+            &= x\ln(\theta) - \theta- \ln(x!) 
+\end{aligned}
+$$
+
+Förstaderivatan utav log-likelihood funktionen för en observation blir
+
+$$
+\begin{aligned}
+  l'(\theta) &= \frac{d }{d\theta} \bigg(x\ln(\theta) - \theta- \ln(x!) \bigg) \\
+             &= \frac{x}{\theta} - 1
+\end{aligned}
+$$
+
+och andraderivatan kan då beräknas till
+
+$$
+\begin{aligned}
+  l''(\theta) &= \frac{d }{d\theta} \bigg(\frac{x}{\theta} - 1 \bigg) \\
+              &= -\frac{x}{\theta^2}
+\end{aligned}
+$$
+
+Eftersom att $E[x] = \theta$ kan vi då beräkna Jeffreys fördelning till
+
+$$
+\begin{aligned}
+  p(\theta) \propto \sqrt{I(\theta)} &= \sqrt{-E[l''(\theta)]} \\ 
+            &= \sqrt{-E\bigg[-\frac{x}{\theta^2}\bigg]} \\
+            &= \frac{1}{\sqrt{\theta}}
+\end{aligned}
+$$
+
+Vilket är lika med apriorifördelningen som vi skulle utgå ifrån. Nu kan vi fortsätta med att härleda aposteriorifördelningen som ges utav uttrycket
+
+$$
+\begin{aligned}
+  p(x | \theta) = \frac{p(\theta | x)p(\theta)}{p(x)} \propto p(\theta | x)p(\theta)
+\end{aligned}
+$$
+
+Där $p(\theta | x)$ är likelihood funktionen för hela stickprovet och $p(\theta)$ är apriorifördelningen som vi blev tilldelade. Likelihooden för hela stickprovet ges utav
+
+$$
+\begin{aligned}
+  L_n(\theta) &= \prod_{i=1}^n\frac{\theta^{x_i} e^{-\theta}}{x_i!} \\
+              &= \frac{\theta^{\sum_{i=1}^n x_i} e^{-n\theta}}{\prod_{i=1}^nx_i!} \\
+              &= \frac{\theta^{n \bar x} e^{-n\theta}}{\prod_{i=1}^nx_i!} \\
+              &\propto \theta^{n \bar x} e^{-n\theta}
+\end{aligned}
+$$
+
+Aposteriorifördelningen blir då
+
+$$
+\begin{aligned}
+  p(x | \theta) &\propto \theta^{n \bar x} e^{-n\theta} \frac{1}{\sqrt{\theta}} \\
+                &= \theta^{n \bar x - 1/2} e^{-n\theta}
+\end{aligned}
+$$
+
+och eftersom $\Gamma(\alpha, \beta) \propto \theta^{\alpha-1} e^{-\beta\theta}$ kan vi säga att aposteriorifördelningen är proportionell mot $\Gamma(n\bar x + 1/2, n)$ vilket är en gammafördelning.
+
+## Fall 2
+
+Nu utgår vi istället från apriorifördelningen $p(\theta) \sim \Gamma(\alpha, \beta) \propto \theta^{\alpha-1} e^{-\beta\theta}$ samt likelihood funktionen från fall 1. Detta ger oss aposteriorifördelningen
+
+$$
+\begin{aligned}
+  p(x | \theta) &\propto \theta^{n \bar x} e^{-n\theta} \theta^{\alpha-1} e^{-\beta\theta} \\
+                &= \theta^{\alpha + n \bar x - 1} e^{-(\beta+n)\theta}
+\end{aligned}
+$$
+
+Vilket är proportionell mot $\Gamma(\alpha + n\bar x, \beta + n)$. Vi kan därmed dra slutsatsen att aposteriorifördelningen i fall 2 är proportionell mot samma gammafördelning som i fall 1 då $\alpha=1/2$ och $\beta=0$.
+
+# Deluppgift 2
+
+```{r echo=FALSE, fig.height=10, fig.width=8, fig.cap="Simulerad fördelning av medelvärdet för icke-parametriskt samt parametrisk bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
+par(mfrow = c(2, 1))
+hist_boot()
+hist_sim()
+```
+
