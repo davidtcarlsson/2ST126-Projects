@@ -121,12 +121,97 @@ Vilket är proportionell mot $\Gamma(\alpha + n\bar x, \beta + n)$. Vi kan därm
 
 # Deluppgift 2
 
-I deluppgift 2 ska vi konstruera konfidensintervall med hjälp av bootstrap.
+I deluppgift 2 ska vi konstruera konfidensintervall med hjälp av bootstrap. 
 
-```{r echo=FALSE, fig.cap="Simulerad fördelning av medelvärdet för icke-parametriskt  bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
+## Percentilmetoden
+
+Ett $100(1 - \alpha)$%-igt intervall för $\theta$ har gränserna
+
+$$
+\begin{aligned}
+\left[\theta^*_{(m)}, \theta^*_{(B+1-m)} \right]
+\end{aligned}
+$$
+
+Där
+
+$$
+\begin{aligned}
+\theta^*_{i} &= \text{Medelvärdet för de i:nte genererade stickprovet} \\
+B &= \text{Antalet stickprov genererade} \\
+\alpha &= \text{Signifikansnivå} \\
+m &= \alpha/2*B 
+\end{aligned}
+$$
+
+## "Basic" metoden
+
+Ett $100(1 - \alpha)$%-igt intervall för $\theta$ har gränserna
+
+$$
+\begin{aligned}
+ \left[ 2\hat\theta - \theta^*_{(B+1-m)}, 2\hat\theta - \theta^*_{(m)} \right ]
+\end{aligned}
+$$
+
+Där
+
+$$
+\begin{aligned}
+\hat\theta &= \text{Medelvärdet för det ursprungliga stickprovet}\\
+\theta^*_{i} &= \text{Medelvärdet för de i:nte genererade stickprovet} \\
+B &= \text{Antalet stickprov genererade} \\
+\alpha &= \text{Signifikansnivå} \\
+m &= \alpha/2*B 
+\end{aligned}
+$$
+
+## Icke-parametrisk bootstrap
+
+Applicerar vi percentilintervallet på medelvärdena som genererades från en icke-parametriska bootstrap får vi följande gränser.
+
+$$
+\begin{aligned}
+[1.8, 3.6]
+\end{aligned}
+$$
+
+I figur 1 är intervallets gränser markerade som två blåa linjer. Applicerar vi istället "basic" metoden får vi följande gränser
+
+$$
+\begin{aligned}
+[2, 3.8]
+\end{aligned}
+$$
+
+och dessa är markerade i figur 1 som två lila linjer. Vi kan notera att "basic" intervallet ligger till höger om percentil intervallet. Detta är en indikation på att fördelningen inte är helt symmetriskt eftersom då hade intervallgränserna varit samma för båda metoder.
+
+```{r hist_boot, echo=FALSE, fig.cap="Simulerad fördelning av medelvärdet för icke-parametriskt  bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
 hist_boot()
 ```
+
+## Parametrisk bootstrap
+
+Applicerar vi percentilintervallet på medelvärdena som genererades från en parametriska bootstrap får vi följande gränser.
+
+$$
+\begin{aligned}
+[1.8, 3.9]
+\end{aligned}
+$$
+
+I figur 2 är intervallets gränser markerade som två blåa linjer. Applicerar vi istället "basic" metoden får vi följande gränser
+
+$$
+\begin{aligned}
+[1.7, 3.8]
+\end{aligned}
+$$
+
+Om vi jämför med det icke-parametriska datasetet så är intervallen i detta fall något bredare. Det verkar alltså som att fördelningen för det parametriska datasetet är bredare (eller plattare) än i det icke-parametriska fallet. Vi kan dock notera att gränserna ligger närmare varandra vilket kan vara en indikation på att detta datasetet är relativt symmetriskt.
 
 ```{r echo=FALSE, fig.cap="Simulerad fördelning av medelvärdet för parametrisk bootstrap. Medelvärdet av fördelningen är markerat med den röda linjen. Konfidensintervallsgränserna är markerade i blått (percentil) och lila (\"basic\")."}
 hist_sim()
 ```
+
+

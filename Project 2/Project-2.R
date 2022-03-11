@@ -40,7 +40,7 @@ means_boot <- vapply(boot, FUN = mean, FUN.VALUE = double(1))
 # Which gives us the distribution
 hist_boot <- function() {
   hist(x = means_boot, 
-       main = "Fördelningen av medelvärden (boot)", 
+       main = "Fördelningen av medelvärden (icke-parametrisk)", 
        col = "lightblue", 
        breaks = breakpoints,
        ylim = ylimits,
@@ -82,7 +82,7 @@ means_sim <- vapply(sim, FUN = mean, FUN.VALUE = double(1))
 # Distribution for the means from simulations
 hist_sim <- function() {
   hist(x = means_sim, 
-       main = "Fördelningen av medelvärden (sim)", 
+       main = "Fördelningen av medelvärden (parametrisk)", 
        col = "lightgreen", 
        breaks = breakpoints,
        ylim = ylimits,
